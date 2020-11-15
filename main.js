@@ -1,10 +1,11 @@
 (() => {
     const stepElems = document.querySelectorAll('.step');
     const graphicElems = document.querySelectorAll('.graphic-item');
-    let currentItem; //현재 활성화된(visible class가 붙은). graphic-item을 지정
+    //현재 활성화된(visible class가 붙은). graphic-item을 지정
+    let currentItem = graphicElems[0]; 
 
     for(let i = 0; i < stepElems.length; i++) {
-        stepElems[i].CDATA_SECTION_NODE.index = i;
+        stepElems[i].dataset.index = i;
         graphicElems[i].dataset.index = i;
     }
 
