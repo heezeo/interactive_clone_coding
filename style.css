@@ -35,6 +35,11 @@ img {
 	top: 0;
 	width: 100%;
 	height: 100%;
+	opacity: 0;
+	transition: 0.5s;
+}
+.visible {
+	opacity: 1;
 }
 .scene-img {
 	max-height: 100vh;
