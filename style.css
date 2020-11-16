@@ -54,3 +54,10 @@ img {
 	background: rgba(255, 255, 255, 0.8);
 	box-shadow: rgba(0, 0, 0, 0.3) 0 0 3px;
 }
+.bird {
+	position: absolute;
+	left: 0;
+	bottom: 70%;
+	width: 100px;
+	transition: 1.5s;
+}
