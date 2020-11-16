@@ -1,39 +1,49 @@
 (() => {
     const stepElems = document.querySelectorAll('.step');
     const graphicElems = document.querySelectorAll('.graphic-item');
-    //현재 활성화된(visible class가 붙은). graphic-item을 지정
     let currentItem = graphicElems[0]; 
+    let ioIndex;
+
+    const io = new IntersectionObserver((entries, observer) => {
+        console.log(entries[0].target.dataset.index);
+        ioIndex = entries[0].target.dataset.index * 1;
+    });
 
     for(let i = 0; i < stepElems.length; i++) {
+        io.observe(stepElems[i]);
         stepElems[i].dataset.index = i;
         graphicElems[i].dataset.index = i;
     }
 
-function activate() {
-    currentItem.classList.add('visible');
-}
+    function activate() {
+        currentItem.classList.add('visible');
+    }
 
-function inactivate() {
-    currentItem.classList.remove('visible');
-}
-window.addEventListener('scroll', () => {
-    let step;
-    let boundingRect;
-        
-    for (let i = 0; i < stepElems.length; i++) {
-        step = stepElems[i];
-        boundingRect = step.getBoundingClientRect();
+    function inactivate() {
+        currentItem.classList.remove('visible');
+    }
+    window.addEventListener('scroll', () => {
+        let step;
+        let boundingRect;
+        let temp++;
             
-        if (boundingRect.top > window.innerHeight * 0.1 &&
-            boundingRect.top < window.innerHeight * 0.8) {
-                    
-                if (currentItem) {
-                    inactivate();
-                }
-                currentItem = graphicElems[step.dataset.index];
-                activate();
-            }
-        }
-    });
+        for (let i = ioIndex -1; i < ioIndex + 2; i++) {
+            step = stepElems[i];
+            if (!step) continue;
+            boundingRect = step.getBoundingClientRect();
+            
+            temp++;
 
+            if (boundingRect.top > window.innerHeight * 0.1 &&
+                boundingRect.top < window.innerHeight * 0.8) {
+
+                    inactivate();
+                    currentItem = graphicElems[step.dataset.index];
+                    activate();
+                }
+            }
+
+            console.log(temp);
+        });
+        activate();
 })();
