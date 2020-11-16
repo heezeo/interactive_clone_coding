@@ -9,6 +9,13 @@
         graphicElems[i].dataset.index = i;
     }
 
+function activate() {
+    currentItem.classList.add('visible');
+}
+
+function inactivate() {
+    currentItem.classList.remove('visible');
+}
 window.addEventListener('scroll', () => {
     let step;
     let boundingRect;
@@ -21,12 +28,12 @@ window.addEventListener('scroll', () => {
             boundingRect.top < window.innerHeight * 0.8) {
                     
                 if (currentItem) {
-                    currentItem.classList.remove('visible');
+                    inactivate();
                 }
                 currentItem = graphicElems[step.dataset.index];
-                currentItem.classList.add('visible');
+                activate();
             }
         }
     });
-    
+
 })();
